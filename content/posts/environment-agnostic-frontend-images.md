@@ -4,10 +4,10 @@ title:  "How to create frontend images with environment variables"
 date:   2021-01-24 
 tags:
   - docker
-  - devops
-  - environment
+  - react
 categories:
   - frontend
+  - devops
 comments: true
 aliases:
   - /environment-agnostic-frontend-images

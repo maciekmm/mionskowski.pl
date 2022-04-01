@@ -4,10 +4,9 @@ title:  "Parsing HTML with Go using stream processing"
 date:   2015-11-22
 tags:
  - go
- - stream-processing
- - web
+ - stream processing
 categories:
- - go
+ - backend
 comments: true
 aliases:
  - /html-golang-stream-processing

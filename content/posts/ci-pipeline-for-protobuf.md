@@ -3,12 +3,12 @@ layout: post
 title:  "How to detect breaking changes and lint Protobuf automatically using Gitlab CI and Buf"
 date: 2021-04-07
 tags:
- - devops
- - ci/cd
+ - ci
+ - protobuf
+ - gRPC
  - gitlab
 categories:
  - devops
-comments: false
 aliases:
  - /ci-pipeline-for-protobuf
 ---

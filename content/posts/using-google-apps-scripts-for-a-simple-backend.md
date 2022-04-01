@@ -4,11 +4,9 @@ title:  "Using Google Apps Scripts for a simple backend"
 date:   2016-03-20
 tags:
  - google
- - apps
  - go
 categories:
- - go
- - google
+- backend
 comments: true
 aliases:
  - /using-google-apps-scripts-for-a-simple-backend

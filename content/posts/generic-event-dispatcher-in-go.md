@@ -4,10 +4,10 @@ title:  "Generic event emitter/dispatcher in Go"
 date:   2015-12-26
 tags:
  - go
- - reflect
- - events
+ - reflection
+ - event driven
 categories:
- - go
+ - backend
 comments: true
 aliaes:
  - /generic-event-dispatcher-in-go

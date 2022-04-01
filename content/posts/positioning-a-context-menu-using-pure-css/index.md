@@ -7,8 +7,9 @@ tags:
   - web
   - context menu
   - ux
+  - ui
 categories:
-  - web
+  - frontend
 comments: true
 excerpt: An efficient and simple solution to context menus displaying outside browser window.
 aliases:

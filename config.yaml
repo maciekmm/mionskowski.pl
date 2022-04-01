@@ -1,0 +1,64 @@
+baseURL: 'https://mionskowski.pl'
+languageCode: 'en-us'
+title: 'Maciej Mionskowski'
+theme: 'PaperMod'
+paginate: 3
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+outputFormats:
+  RSS:
+    baseName: feed
+
+params:
+  keywords: [software development, software developer, blog, diy]
+  env: production
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: false
+  showtoc: true
+  tocopen: false
+  homeInfoParams:
+      Title: Hi, I'm Maciej 👋 
+      Content: |
+        And this is my notebook focused on Software Engineering ⌨️.
+
+        The notes you will find here are guides I mainly keep for self reference. Feel free to help yourself too.
+
+        ---
+        You might also be interested in [ContainerTabsSidebar for Firefox](https://addons.mozilla.org/en-US/firefox/addon/container-tabs-sidebar/). It will nicely group your tabs and put them in the Sidebar.
+
+        ---
+        I also love sailing ⛵, euro board games 🎲, and tea & coffee ☕. 
+        
+
+  socialIcons: # optional
+      - name: email
+        url: mailto:hi@mionskowski.pl
+      - name: github
+        url: https://github.com/maciekmm
+      - name: linkedin
+        url: https://linkedin.com/in/mionskowski
+      - name: rss
+        url: /rss
+  editPost:
+    URL: "https://github.com/maciekmm/mionskowski.pl/tree/master/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+menu:
+  main:
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 30
