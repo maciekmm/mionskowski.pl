@@ -1,0 +1,4 @@
+baseURL = 'https://mionskowski.pl'
+languageCode = 'en-us'
+title = 'Maciej Mionskowski'
+theme = 'PaperMod'

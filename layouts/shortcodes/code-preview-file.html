@@ -1,0 +1,17 @@
+{{ $language := .Get "language" }}
+{{ if (eq $language "css" ) }}
+<style type="text/css">
+{{ .Inner | safeCSS }}
+</style>
+{{- else if (eq $language "html" ) }}
+{{ .Inner | safeHTML }}
+{{- else if (eq $language "javascript" ) }}
+<script>
+{{ .Inner | safeJS }}
+</script>
+{{- end }}
+
+{{ if (.Get "hide") }}
+{{ else }}
+{{ .Parent.Scratch.SetInMap "code-preview-source" $language (trim .Inner "\n") }}
+{{ end }}
