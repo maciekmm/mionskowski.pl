@@ -9,7 +9,7 @@ tags:
 categories:
  - backend
 comments: true
-aliaes:
+aliases:
  - /generic-event-dispatcher-in-go
 ---
 

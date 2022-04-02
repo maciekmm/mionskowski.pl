@@ -172,10 +172,11 @@ In case you forget to specify the environment variable the container will exit w
 
 You can now access the container under 127.0.0.1:8080.
 
-{% capture preview_html %}
+{{< code-preview url="localhost:8080" >}}
+{{< code-preview-file language="html" hide=true >}}
 API Host: http://prod.company.com/
-{% endcapture %}
+{{< /code-preview-file >}}
+{{< /code-preview >}}
 
-{% include preview.html html=preview_html url="localhost:8080" %}
 
 The full code is available on [Github](https://github.com/maciekmm/environment-agnostic-frontend-docker-image).

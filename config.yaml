@@ -48,7 +48,7 @@ params:
       - name: linkedin
         url: https://linkedin.com/in/mionskowski
       - name: rss
-        url: /rss
+        url: /feed.xml
   editPost:
     URL: "https://github.com/maciekmm/mionskowski.pl/tree/master/content"
     Text: "Suggest Changes" # edit text

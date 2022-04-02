@@ -1,4 +1,4 @@
-<div class="code-preview" {{ with .Get "url" }}data-url="{{ . }}"{{end}}>
+<div class="code-preview" {{ with .Get "url" }}data-url="{{ . | safeURL }}"{{end}}>
     <iframe srcdoc="{{ partial "code-preview.html" (dict "inner" .Inner "placeholder" (or (.Get "placeholder") "") )  | safeHTMLAttr }}">
     </iframe>
 </div>
@@ -20,6 +20,7 @@
 
     * {
         box-sizing: border-box;
+        color: #777;
     }
 
     body::after {
