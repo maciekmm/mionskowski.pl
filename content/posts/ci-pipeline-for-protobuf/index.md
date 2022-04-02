@@ -11,6 +11,9 @@ categories:
  - devops
 aliases:
  - /ci-pipeline-for-protobuf
+cover:
+  image: cover.webp
+  alt: array pointing backwards
 ---
 
 **Protocol Buffers** or **Protobufs** are language-agnostic mechanisms for serializing data. 

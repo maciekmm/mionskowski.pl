@@ -8,6 +8,7 @@ enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
+enableEmoji: true
 
 minify:
   disableXML: true
@@ -17,7 +18,14 @@ outputFormats:
   RSS:
     baseName: feed
 
+imaging:
+  quality: 90
+
 params:
+  cover:
+    linkFullImages: false
+    responsiveImages: true
+    hiddenInList: true
   keywords: [software development, software developer, blog, diy]
   env: production
   defaultTheme: auto
@@ -33,10 +41,11 @@ params:
       Content: |
         And this is my notebook focused on Software Engineering ⌨️.
 
-        The notes you will find here are guides I mainly keep for self reference. Feel free to help yourself too.
+        The notes you will find here are guides I mainly keep for myself, but feel free to help yourself too.
 
         ---
-        You might also be interested in [ContainerTabsSidebar for Firefox](https://addons.mozilla.org/en-US/firefox/addon/container-tabs-sidebar/). It will nicely group your tabs and put them in the Sidebar.
+        You might also be interested in [ContainerTabsSidebar for Firefox](https://addons.mozilla.org/en-US/firefox/addon/container-tabs-sidebar/).
+        The addon will nicely group your tabs and put them in the Sidebar.
 
         ---
         I also love sailing ⛵, euro board games 🎲, and tea & coffee ☕.
