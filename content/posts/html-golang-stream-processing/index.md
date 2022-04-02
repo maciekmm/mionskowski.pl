@@ -90,13 +90,18 @@ Going this way changes our flow to:
 Lets see some graphs comparing both ways of scraping.
 
 Small site
-<hr>
-![](/downloads/cpu-usage-1.png)
-![](/downloads/mem-usage.png)
+
+---
+
+![](images/cpu-usage-1.png)
+![](images/mem-usage.png)
+
 Medium site
-<hr>
-![](/downloads/cpu-usage-2.png)
-![](/downloads/mem-usage-2.png)
+
+---
+
+![](images/cpu-usage-2.png)
+![](images/mem-usage-2.png)
 
 
 These graph represents memory and cpu usage of time while creating a sitemap for small and medium sized sites using stream processing.
