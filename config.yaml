@@ -29,7 +29,7 @@ params:
   showtoc: true
   tocopen: false
   homeInfoParams:
-      Title: Hi, I'm Maciej 👋 
+      Title: Hi, I'm Maciej 👋
       Content: |
         And this is my notebook focused on Software Engineering ⌨️.
 
@@ -39,12 +39,10 @@ params:
         You might also be interested in [ContainerTabsSidebar for Firefox](https://addons.mozilla.org/en-US/firefox/addon/container-tabs-sidebar/). It will nicely group your tabs and put them in the Sidebar.
 
         ---
-        I also love sailing ⛵, euro board games 🎲, and tea & coffee ☕. 
-        
-
+        I also love sailing ⛵, euro board games 🎲, and tea & coffee ☕.
   socialIcons: # optional
       - name: email
-        url: mailto:hi@mionskowski.pl
+        url: "mailto:hello@mionskowski.pl"
       - name: github
         url: https://github.com/maciekmm
       - name: linkedin
