@@ -4,6 +4,8 @@ title: 'Maciej Mionskowski'
 theme: 'PaperMod'
 paginate: 3
 
+copyright: '&copy; 2022 Maciej Mionskowski. Cover images available thanks to [Unsplash](https://unsplash.com).'
+
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
