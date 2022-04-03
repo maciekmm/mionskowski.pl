@@ -1,15 +1,17 @@
 ---
 layout: post
-title:  "The journey of sharing a USB printer over LAN"
+title:  "The journey of sharing a wired USB printer over the network"
 date: 2022-04-03
 tags:
  - hardware
  - raspberrypi
  - cups
  - diy
+ - linux
 categories:
  - diy
  - hardware
+ - story
 cover:
   image: cover.jpg
   alt: an industrial printer printing posters
