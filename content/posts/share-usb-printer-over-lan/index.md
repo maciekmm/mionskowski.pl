@@ -140,7 +140,7 @@ What's left is configuring the driver and discovering the printer locally. This 
 
 # Closing thoughts
 
-I accomplished a several things:
+I accomplished several things:
 
 - I made my wired printer wireless,
 - I learned how to use Packer,
