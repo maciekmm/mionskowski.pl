@@ -1,0 +1,10 @@
+<figure class="code-preview">
+    <iframe sandbox="allow-scripts" srcdoc="{{ .Inner | safeHTMLAttr }}">
+    </iframe>
+</figure>
+<div class="code-preview--source">
+<details class="code-preview--file">
+    <summary>Code</summary>
+    <div class="code-preview--file-content">{{- highlight (trim .Inner "\n") "html" }}</div>
+</details>
+</div>

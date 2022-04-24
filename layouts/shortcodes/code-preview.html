@@ -1,26 +1,32 @@
-<div class="code-preview" {{ with .Get "url" }}data-url="{{ . | safeURL }}"{{end}}>
-    <iframe srcdoc="{{ partial "code-preview.html" (dict "inner" .Inner "placeholder" (or (.Get "placeholder") "") )  | safeHTMLAttr }}">
+<figure class="code-preview" {{ with .Get "url" }}data-url="{{ . | safeURL }}"{{end}}>
+    <iframe {{ if not (.Get "insecure") }}sandbox="allow-scripts"{{ end }} loading="lazy" srcdoc="{{ partial "code-preview.html" (dict "inner" .Inner "placeholder" (or (.Get "placeholder") "") )  | safeHTMLAttr }}">
     </iframe>
+</figure>
+<div class="code-preview--source">
+{{- range $key, $value := .Scratch.Get "snippets" }}
+<details class="code-preview--file" {{ if $value.open }}open{{ end }}>
+<summary markdown="span">{{ $value.language }}</summary>
+<div class="code-preview--file-content">
+{{ highlight $value.source $value.language }}
 </div>
-
-{{ range $key, $value := .Scratch.Get "code-preview-source" }}
-<p><details>
-<summary markdown="span">{{ $key }}</summary>
-{{ highlight $value $key }}
-</details></p>
-{{ end }}
+</details>
+{{- end }}
+</div>
 
 {{ define "partials/code-preview.html" }}
 <!doctype html>
 <html lang="en">
 <style>
     html, body {
-        height: 100%; width: 100%; overflow: hidden; font-family: sans-serif; 
+        height: 100%;
+        width: 100%;
+        font-family: sans-serif; 
+        color: rgb(218, 218, 219);
     }
 
-    * {
+    *, *::after, *::before {
+        margin: 0;
         box-sizing: border-box;
-        color: #777;
     }
 
     body::after {
@@ -32,6 +38,8 @@
         transform: translateX(-50%) translateY(-50%);
     }
 </style>
+<body>
 {{ .inner }}
+</body>
 </html>
 {{ end }}

@@ -33,7 +33,7 @@ After some time spent tinkering I came up with a CSS solution to **calculate the
 
 ## Demo 
 {{< code-preview url="/" placeholder="Right click :)" >}}
-{{< code-preview-file language="css" hide=false >}}
+{{< code-preview-file language="css" hide=false open=true >}}
 #menu {
     --mouse-x: 0;
     --mouse-y: 0;
@@ -54,7 +54,7 @@ After some time spent tinkering I came up with a CSS solution to **calculate the
     list-style: none;
     padding: 0;
     font-size: 10pt;
-    color: #777;
+    color: black;
     z-index: 5;
     background: #fff;
 }
@@ -72,13 +72,13 @@ After some time spent tinkering I came up with a CSS solution to **calculate the
     cursor: pointer;
 }
 {{< /code-preview-file >}}
-{{< code-preview-file language="html" >}}
+{{< code-preview-file language="html" open=true >}}
 <ul id='menu'>
   <li>Option 1</li>
   <li>Option 2</li>
 </ul>
 {{< /code-preview-file >}}
-{{< code-preview-file language="javascript" >}}
+{{< code-preview-file language="javascript" open=true >}}
 const menu = document.querySelector('#menu');
 // hide the menu
 window.addEventListener('click', event => menu.style.display = 'none')

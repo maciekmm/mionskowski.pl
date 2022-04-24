@@ -12,10 +12,7 @@
 {{- else }}
     {{- .Inner | safe }}
 {{- end }}
-
-{{- if not (.Get "hide") }}
-    {{-
-        .Parent.Scratch.SetInMap "snippets" ( string .Ordinal )
-        (dict "source" (trim .Inner "\n") "open" (.Get "open") "language" (.Get "language")) 
-    }}
-{{- end }}
+{{-
+    .Parent.Scratch.SetInMap "snippets" ( string .Ordinal )
+    (dict "source" (trim .Inner "\n") "language" (.Get "language")) 
+}}

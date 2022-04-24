@@ -1,0 +1,14 @@
+<figure class="code-preview">
+    <iframe sandbox="allow-scripts" srcdoc="{{ .Inner | safeHTMLAttr }}">
+    </iframe>
+</figure>
+<div class="code-preview--source">
+{{- range $key, $value := .Scratch.Get "snippets" }}
+<details class="code-preview--file">
+<summary markdown="span">{{ $value.language }}</summary>
+<div class="code-preview--file-content">
+{{- highlight $value.source $value.language }}
+</div>
+</details>
+{{- end }}
+</div>

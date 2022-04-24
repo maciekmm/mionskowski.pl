@@ -1,27 +1,27 @@
 .code-preview {
 	width: 100%;
 	margin: 0 auto;
-	border: 6px solid var(--tertiary);
+	border: 6px solid rgb(65, 66, 68);
 	border-radius: 5px;
 	display: flex;
+	overflow: auto;
 	flex-direction: column;
 	background: var(--tertiary);
-
+	background: rgb(65, 66, 68);
 }
 
 .code-preview iframe {
-	height: 300px;
+	min-height: 300px;
 	width: 100%;
 	margin: 0 auto;
 	border: 0;
-	background: var(--code-bg);
-	height: 100%;
+	background: #272822;
 }
 
 .code-preview::before {
 	content: attr(data-url);
 	color: var(--secondary);
-	background: var(--code-bg);
+	background: #272822;
 	width: 80%;
 	height: 50%;
 	margin: 5px auto;
@@ -31,4 +31,34 @@
 	text-align: center;
 	font-size: 8pt;
 	padding: 5px;
+}
+
+.code-preview--source {
+	background: rgb(65, 66, 68);
+	color: rgb(218, 218, 219); 
+	display: flex;
+	margin: 10px 0;
+	border-radius: 5px;
+	flex-wrap: wrap;
+}
+
+details.code-preview--file > summary {
+	padding: 5px 10px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: 10pt;
+	min-width: 100px;
+}
+
+.code-preview--file {
+	width: 100%;
+	max-width: 100%;
+}
+
+.code-preview--source .code-preview--file-content .highlight,
+.code-preview--file-content .highlight .code-preview code {
+	--radius: 0;
+	padding-top: 0;
+	margin-top: 0;
+	margin-bottom: 0;
 }

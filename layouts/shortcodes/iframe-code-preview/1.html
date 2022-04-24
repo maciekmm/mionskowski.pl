@@ -1,0 +1,6 @@
+<iframe sandbox="allow-scripts" srcdoc="{{ .Inner | safeHTMLAttr }}">
+</iframe>
+<details>
+<summary>Code</summary>
+{{- .Inner | htmlUnescape }}
+</details>
