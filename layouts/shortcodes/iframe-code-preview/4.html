@@ -1,0 +1,36 @@
+<figure class="code-preview">
+    <iframe sandbox="allow-scripts" srcdoc="{{ partial "iframe-code-preview/boilerplate.html" (dict "inner" .Inner) | safeHTMLAttr }}">
+    </iframe>
+</figure>
+<div class="code-preview--source">
+{{- range $key, $value := .Scratch.Get "snippets" }}
+<details class="code-preview--file">
+<summary markdown="span">{{ $value.language }}</summary>
+<div class="code-preview--file-content">
+{{ highlight $value.source $value.language }}
+</div>
+</details>
+{{- end }}
+</div>
+
+{{ define "partials/iframe-code-preview/boilerplate.html" }}
+<!doctype html>
+<html lang="en">
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+        font-family: sans-serif; 
+        color: rgb(218, 218, 219);
+    }
+
+    *, *::after, *::before {
+        margin: 0;
+        box-sizing: border-box;
+    }
+</style>
+<body>
+{{ .inner }}
+</body>
+</html>
+{{ end }}

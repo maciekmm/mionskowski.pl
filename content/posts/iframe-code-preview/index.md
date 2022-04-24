@@ -120,7 +120,7 @@ The following code example illustrates the security concern.
 {{< rawhtml >}}
 <div id="insecure-outside">This is an element outside of the iframe</div>
 <iframe srcdoc="
-<div id=&quot;secure-inside&quot; style=&quot;color: gray;&quot;>This element is inside the iframe</div>
+<div id=&quot;secure-inside&quot; style=&quot;color: white;&quot;>This element is inside the iframe</div>
 <button>modify something outside</button>
 <script type=&quot;text/javascript&quot;>
 document.querySelector(&quot;button&quot;).addEventListener(&quot;click&quot;, () => {
@@ -152,7 +152,7 @@ An empty `sandbox` attribute will be too limiting, but let's start with `allow-s
 {{< rawhtml >}}
 <div id="insecure-outside">This is an element outside of the iframe</div>
 <iframe sandbox="allow-scripts" srcdoc="
-<div id=&quot;secure-inside&quot; style=&quot;color: gray;&quot;>This element is inside the iframe</div>
+<div id=&quot;secure-inside&quot; style=&quot;color: white;&quot;>This element is inside the iframe</div>
 <button>modify something outside</button>
 <script type=&quot;text/javascript&quot;>
 document.querySelector(&quot;button&quot;).addEventListener(&quot;click&quot;, () => {
@@ -370,8 +370,7 @@ Highlighting everything as `html` is not ideal.
 We would like to highlight `css`, `javascript`, and `html` separately.
 To achieve that we need to split the code into fragments based on their language.
 
-Fortunately, Hugo supports nesting shortcode templates.
-We will use nested templates to wrap our code snippets with additional metadata such as `language`. 
+We will use Hugo's nested templates to wrap our code snippets with additional metadata such as `language`. 
 
 The invocation will now look like:
 ```html
@@ -390,7 +389,7 @@ The invocation will now look like:
 
 Notice the `language` attribute inside the `code-preview-file`, this will hint the Hugo engine how to highlight the embedded snippet.
 
-Let's define another shortcode inside `shortcodes/code-preview-file.html`:
+Let's define the `code-preview-file` shortcode under `shortcodes/code-preview-file.html`:
 
 ```html
 {{- $language := .Get "language" }}
@@ -414,13 +413,12 @@ Let's define another shortcode inside `shortcodes/code-preview-file.html`:
 ```
 
 There are a few things going on here. 
-Firstly, we _switch_ on the language parameter value and include the boilerplate needed to embed the snippet into the document such as `<style>` or `<script>`. 
-Without the boilerplate we would have to include those tags into the code listing, 
-which would break highlighting and obscure the listing.
 
-Secondly, we use [Hugo's `.Scratch`](https://gohugo.io/functions/scratch/) to pass the snippet and the language used to the parent (`code-preview`) shortcode for the purpose of rendering code listings. 
+Firstly, based on the `language` parameter we include the appropriate boilerplate, if needed, to embed the fragment into the document. The boilerplate can be either a `<style>` or `<script>`. 
 
-The object will resemble the following structure:
+Secondly, we use [Hugo's `.Scratch`](https://gohugo.io/functions/scratch/) to pass the snippet and the language used to the parent (`code-preview`) shortcode for the purpose of rendering code listings later.
+
+The information that is passed will be a map resembling the following structure:
 
 ```text
 snippets
@@ -434,7 +432,7 @@ snippets
 
 The parent (`shortcodes/code-preview.html`) will be able to access this object and create code listings.
 
-We now need to adjust the `shortcodes/code-preview.html` template to pick the correct language hint when highlighting the code:
+We now need to adjust the parent template to pick the correct language hint when highlighting the code:
 
 {{< highlight html >}}
 <figure class="code-preview">
@@ -459,52 +457,181 @@ Let's invoke the shortcode:
 
 ```html
 {{</* code-preview */>}}
-  {{</* code-preview-file language="html" */>}}
-    <p class="class">We will build a simple code preview based on iframes</p>
-  {{</* /code-preview-file */>}}
-  {{</* code-preview-file language="css" */>}}
-  .class {
-    color: white;
-  }
-  {{</* /code-preview-file */>}}
+{{</* code-preview-file language="html" */>}}
+  <p class="class">We will build a simple code preview based on iframes</p>
+{{</* /code-preview-file */>}}
+{{</* code-preview-file language="css" */>}}
+.class {
+  color: white;
+}
+{{</* /code-preview-file */>}}
 {{</* /code-preview */>}}
 ```
 
 {{< iframe-code-preview/3 >}}
-  {{< iframe-code-preview/file-3 language="html" >}}
-    <p class="class">We will build a simple code preview based on iframes</p>
-  {{< /iframe-code-preview/file-3 >}}
-  {{< iframe-code-preview/file-3 language="css" >}}
-    .class {
-      color: white;
-    }
-  {{< /iframe-code-preview/file-3 >}}
+{{< iframe-code-preview/file-3 language="html" >}}
+<p class="class">We will build a simple code preview based on iframes</p>
+{{< /iframe-code-preview/file-3 >}}
+{{< iframe-code-preview/file-3 language="css" >}}
+.class {
+  color: white;
+}
+{{< /iframe-code-preview/file-3 >}}
 {{< /iframe-code-preview/3 >}}
 
+Fancy!
 
-### Adding a boilerplate 
+### Applying default styles to the content
 
-With code examples one often wants to highlight a particular fragment, 
-not the whole document with elements such as `doctypes` or default styles (e.g. default font color).
+While elements such as `<head>`, `<body>` and `<!doctype html>` are not necessary in HTML5 
+it's sometimes desirable to have them inside the `iframe`. 
 
+We can already achieve thhat by including the boilerplate in the `code-preview-file` fragments of language `html`
+but that would obscure the whole listing.
 
-## The complete Hugo shortcode1
+We will modify the code preview to apply the boilerplate to every instance and also add some reset styles on top of that.
 
-```template
-{{</* code-preview url="/helloworld" */>}}
-  {{</* code-preview-file language="html" */>}}
-  <p id="css">We will build a simple code preview based on iframes</p>
-  {{</* /code-preview-file */>}}
-  
-  {{</* code-preview-file language="css" hide=false open=true */>}}
-  #css {
-    text-decoration: underline;
-  }
-  {{</* /code-preview-file */>}}
-{{</* /code-preview */>}}
+Let's modify the `shortcodes/code-preview.html` again:
+
+```
+<figure class="code-preview">
+    <iframe sandbox="allow-scripts" srcdoc="{{ partial "code-preview.html" (dict "inner" .Inner) | safeHTMLAttr }}">
+    </iframe>
+</figure>
+<div class="code-preview--source">
+{{- range $key, $value := .Scratch.Get "snippets" }}
+<details class="code-preview--file">
+<summary markdown="span">{{ $value.language }}</summary>
+<div class="code-preview--file-content">
+{{ highlight $value.source $value.language }}
+</div>
+</details>
+{{- end }}
+</div>
+
+{{ define "partials/code-preview.html" }}
+<!doctype html>
+<html lang="en">
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+        font-family: sans-serif; 
+        color: rgb(218, 218, 219);
+    }
+
+    *, *::after, *::before {
+        box-sizing: border-box;
+    }
+</style>
+<body>
+{{ .inner }}
+</body>
+</html>
+{{ end }}
 ```
 
-I [built it once](https://github.com/maciekmm/maciekmm.github.io/blob/master/_includes/preview.html) for [Jekyll](https://jekyllrb.com), and we will build one for [Hugo](https://gohugo.io) now. 
+As including the whole boilerplate inside the `srcdoc` attribute wouldn't be handy, we define an inline [partial template](https://gohugo.io/templates/partials/) and reference it in the `srcdoc` attribute.
+
+The partial template contains the regular `doctype`, `html` and `head` with some additional styles attached. You can customize it to your liking.
+
+
+Here's the last invocation:
+
+{{< iframe-code-preview/4 >}}
+{{< iframe-code-preview/file-3 language="html" >}}
+<p class="class">We will build a simple code preview based on iframes</p>
+{{< /iframe-code-preview/file-3 >}}
+{{< iframe-code-preview/file-3 language="css" >}}
+.class {
+  color: white;
+  padding: 1em;
+}
+{{< /iframe-code-preview/file-3 >}}
+{{< /iframe-code-preview/4 >}}
+
+## The complete solution for Hugo
+
+If you don't want to follow the whole process of building the code preview yourself here are all the files needed to achieve it.
+
+### shortcodes/code-preview.html
+```html
+<figure class="code-preview">
+    <iframe sandbox="allow-scripts" srcdoc="{{ partial "iframe-code-preview.html" (dict "inner" .Inner) | safeHTMLAttr }}">
+    </iframe>
+</figure>
+<div class="code-preview--source">
+{{- range $key, $value := .Scratch.Get "snippets" }}
+<details class="code-preview--file">
+<summary markdown="span">{{ $value.language }}</summary>
+<div class="code-preview--file-content">
+{{ highlight $value.source $value.language }}
+</div>
+</details>
+{{- end }}
+</div>
+
+{{ define "partials/iframe-code-preview.html" }}
+<!doctype html>
+<html lang="en">
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+        font-family: sans-serif; 
+        color: rgb(218, 218, 219);
+    }
+
+    *, *::after, *::before {
+        margin: 0;
+        box-sizing: border-box;
+    }
+</style>
+<body>
+{{ .inner }}
+</body>
+</html>
+{{ end }}
+```
+
+### shortcodes/code-preview-file.html
+
+```html
+{{- $language := .Get "language" }}
+{{- if (eq $language "css" ) }}
+<style type="text/css">
+    {{- .Inner | safeCSS }}
+</style>
+{{- else if (eq $language "html" ) }}
+    {{- .Inner | safeHTML }}
+{{- else if (eq $language "javascript" ) }}
+<script type="text/javascript">
+    {{- .Inner | safeJS }}
+</script>
+{{- else }}
+    {{- .Inner | safe }}
+{{- end }}
+{{-
+    .Parent.Scratch.SetInMap "snippets" ( string .Ordinal )
+    (dict "source" (trim .Inner "\n") "language" (.Get "language")) 
+}}
+```
+
+### An examplary invocation
+
+```html
+{{</* code-preview */>}}
+{{</* code-preview-file language="html" */>}}
+<p id="css">We will build a simple code preview based on iframes</p>
+{{</* /code-preview-file */>}}
+
+{{</* code-preview-file language="css" */>}}
+#css {
+  text-decoration: underline;
+}
+{{</* /code-preview-file */>}}
+{{</* /code-preview */>}}
+```
 
 [^1]: If the playground is compromised your website will likely be compromised as well.
 [^2]: As long as you only run trusted code inside.
