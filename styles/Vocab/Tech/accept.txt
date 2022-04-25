@@ -1,0 +1,10 @@
+(?i)css
+JavaScript
+url
+(?i)dereference
+transpiler
+(?i)preprocessor
+(?i)html
+(?i)embeddable
+shortcode
+http
