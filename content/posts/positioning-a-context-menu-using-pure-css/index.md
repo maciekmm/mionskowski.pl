@@ -18,12 +18,12 @@ aliases:
 
 # Introduction
 
-I was recently challenged with a pretty common, and frankly a simple problem of positioning a custom context menu. When you DuckDuckGo [*how to position a context menu*](https://duckduckgo.com/?q=positioning+a+context+menu&t=ffab&ia=web) phrase you will be greeted with solutions that either:
+I was recently challenged with a pretty common, and a simple problem of positioning a custom context menu. When you DuckDuckGo [*how to position a context menu*](https://duckduckgo.com/?q=positioning+a+context+menu&t=ffab&ia=web) phrase you will be greeted with solutions that either:
 - [don't consider boundary conditions](https://stackoverflow.com/a/15795450) or
-- [use javascript to check the conditions and position the menu accordingly](https://stackoverflow.com/a/31354591). 
+- [use JavaScript to check the conditions and position the menu accordingly](https://stackoverflow.com/a/31354591). 
 
 The issue with the first solution is that it's not great in terms of **User Experience**.
-The second one is okay but requires measurements and some javascript logic. It is also not responsive to window resizes.
+The second one is okay but requires measurements and some JavaScript logic. It's also not responsive to window resizes.
 
 # A different approach
 
@@ -103,7 +103,7 @@ Let's focus on the *transform* property:
 }
 ```
 
-more specficially on the _translateX_ component, as it's analogous to _translateY_.
+more specifically on the _translateX_ component, as it's analogous to _translateY_.
 
 ```css
 transform: translateX(min(var(--mouse-x), calc(100vw - 100%)))

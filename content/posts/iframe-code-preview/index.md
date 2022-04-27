@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Building HTML, CSS, and JS code preview using iframe's srcdoc attribute"
-date:   2022-04-24
+date:   2022-04-27
 tags:
   - web
   - css
@@ -21,17 +21,17 @@ cover:
 Many front-end developers and software companies blog about their trade. Oftentimes their writings include code examples with previews. 
 Over the years a plethora of embeddable code playgrounds were created. 
 
-Names such as CodePen, JSFiddle, JS Bin or Plunker may ring a bell to you.
+Names such as CodePen, JSFiddle, JS Bin, or Plunker may ring a bell to you.
 
-They are almost effortless to use, support frameworks, transpilers, preprocessors and other tooling that have evolved in the Javascript community over the years.
+They're almost effortless to use, support frameworks, transpilers, preprocessors and other tooling that have evolved in the Javascript community over the years.
 
-Unfortunately, using some of them might come with downsides or even serious consequences.
+Using some of them might come with downsides or even serious consequences.
 
 ## Potential drawbacks of embedding third-party playgrounds
 
 Embedding third-party playgrounds might be undesirable as some:
 
-- 😱 make you add a `<script>` tag which points to their domain with no `integrity` attribute to embed the preview [^1],
+- 😱 make you add a `<script>` tag to embed the preview. The url points to provider's domain with no `integrity` attribute to check if the code hasn't been tampered with [^1].
 - 🍪 welcome you with a huge cookie prompt,
 - 🐢 are slow to load,
 - 🕵️ track you and your visitors,
@@ -39,15 +39,15 @@ Embedding third-party playgrounds might be undesirable as some:
 
 There are of course bigger and lesser offenders.
 
-It is a good idea to think twice before relying on any third-parties if your or your company's website is at stake. 
+It's a good idea to think twice before relying on any third-parties if your or your company's website is at stake. 
 
-If you don't need all the fancy features this writeup will guide you through building a local code preview that works with your static site generator. It will be simple, inline, lightweight, durable and secure [^2].
+If you don't need all the fancy features this writeup will guide you through building a local code preview that works with your static site generator. It will be simple, inline, lightweight, durable and secure.
 
 # Building a simple code preview
 
 ## What we will build
 
-We will build a simple code preview with javascript support and code listings, the whole following preview depicts what we will achieve.
+We will build a simple code preview with javascript support and code listings. The following example shows what we will achieve.
 
 {{< code-preview >}}
 {{< code-preview-file language="html" >}}
@@ -77,7 +77,7 @@ The features that we will use include:
 You have likely heard of [iframes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe), they allow you to embed third party websites into your website. 
 
 
-What you might not heave stumbled upon is the iframe's `srcdoc` attribute which allows to:
+What you might not be aware of is the iframe's `srcdoc` attribute, which allows to:
 
 {{< blockquote link="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc">}}
 Inline HTML to embed, overriding the src attribute. [...]
@@ -85,7 +85,7 @@ Inline HTML to embed, overriding the src attribute. [...]
 
 Perfect, that sounds pretty useful as we can just put our code in there without creating a separate page for every preview.
 
-Let's start with something simple.
+Let's start with something simple:
 
 ```html
 <iframe srcdoc="<button>Hello world!</button>"></iframe>
@@ -109,7 +109,7 @@ Quotes (`"`) need to be escaped using `&quot;`, as they would otherwise close th
 
 By default this implementation isn't secure. 
 The javascript inside can access the document outside the iframe.
-It would be dangerous if you were to include 3rd party javascript inside it.
+It would be dangerous if included 3rd party JavaScript inside it.
 
 The following code example illustrates the security concern.
 
@@ -163,7 +163,7 @@ document.querySelector(&quot;button&quot;).addEventListener(&quot;click&quot;, (
 "></iframe>
 {{< /rawhtml >}}
 
-If you at the the javascript console, you will notice that the code produces:
+If you at the thjavascript console, you will notice that the code produces:
 
 ```
 Uncaught DOMException: Permission denied to access property "document" on cross-origin object
@@ -173,7 +173,7 @@ This is what we wanted. Depending on you needs you could enable specific feature
 
 ## Adding code listings
 
-Okay, so we have a working secure prototype, but what is a code preview without a code listing?
+Okay, so we a working secure prototype, but what's a code preview without a code listing?
 Let's add a simple one. We will use the [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre) element.
 
 ```html
@@ -209,7 +209,7 @@ or you might continue reading to get a full solution with language-based highlig
 # Productionising the prototype
 
 **Warning:** the rest of the article makes a heavy use of [Hugo](https://gohugo.io)'s features. 
-They are transferable to other technologies, but expect to spend some time converting the ideas shown here. 
+They're transferable to other technologies, but expect to spend some time converting the ideas shown here. 
 
 
 ## Getting rid of code duplication with templates
@@ -217,10 +217,10 @@ They are transferable to other technologies, but expect to spend some time conve
 If you are using a static site generator such as [Hugo](https://gohugo.io) or [Jekyll](https://jekyllrb.com) 
 you will be familiar with templates.
 
-We will focus on Hugo and native Go's templating features, but this can easily translate to other templating languages.
+We will focus on Hugo and native Go's templating features, but this can be easily translated to other templating languages.
 
 Hugo supports [shortcode templates](https://gohugo.io/templates/shortcode-templates/).
-The feature fits our use case perfectly, as we can expect to define something similar to:
+With shortcodes we can expect to define something similar to:
 
 ```html
 {{</* code-preview */>}}
@@ -228,7 +228,7 @@ The feature fits our use case perfectly, as we can expect to define something si
 {{</* /code-preview */>}}
 ```
 
-and get the iframe with code listings without doing any escaping or duplicating code.
+and get the iframe with code listings without doing any escaping or code duplication.
 
 First, create a file under `layouts/shortcodes/code-preview.html` and populate it with the following code. 
 
@@ -260,7 +260,7 @@ Looks promising, it doesn't look too elegant at the moment, but we will address 
 ## Making it pretty
 
 It's time to style the preview. 
-I don't plan to go into much detail as this is not the main topic of this post.
+I don't plan to go into much detail as this isn't the main topic of this post.
 
 The goal is to make the iframe look like a browser window and make code listings match the style of the iframe.
 
@@ -366,8 +366,8 @@ Not too shabby!
 
 ### Multiple code listings
 
-Highlighting everything as `html` is not ideal.
-We would like to highlight `css`, `javascript`, and `html` separately.
+Highlighting everything as `html` isn't ideal.
+We would like to highlight `css`, `javascript`, and `html` respectively.
 To achieve that we need to split the code into fragments based on their language.
 
 We will use Hugo's nested templates to wrap our code snippets with additional metadata such as `language`. 
@@ -414,11 +414,11 @@ Let's define the `code-preview-file` shortcode under `shortcodes/code-preview-fi
 
 There are a few things going on here. 
 
-Firstly, based on the `language` parameter we include the appropriate boilerplate, if needed, to embed the fragment into the document. The boilerplate can be either a `<style>` or `<script>`. 
+Firstly, based on the `language` parameter we include the appropriate boilerplate to embed the fragment into the document. The boilerplate can be either a `<style>` or `<script>`. 
 
 Secondly, we use [Hugo's `.Scratch`](https://gohugo.io/functions/scratch/) to pass the snippet and the language used to the parent (`code-preview`) shortcode for the purpose of rendering code listings later.
 
-The information that is passed will be a map resembling the following structure:
+The information that's passed will be a map resembling the following structure:
 
 ```text
 snippets
@@ -451,7 +451,7 @@ We now need to adjust the parent template to pick the correct language hint when
 </div>
 {{< /highlight >}}
 
-We iterate over the map we have built using the nested shortcode templates and display multiple code listings with appropriate highlighting.
+We iterate over the map we've built using the nested shortcode templates and display multiple code listings with appropriate highlighting.
 
 Let's invoke the shortcode:
 
@@ -483,11 +483,11 @@ Fancy!
 
 ### Applying default styles to the content
 
-While elements such as `<head>`, `<body>` and `<!doctype html>` are not necessary in HTML5 
+While elements such as `<head>`, `<body>` aren't necessary in HTML5, 
 it's sometimes desirable to have them inside the `iframe`. 
 
-We can already achieve thhat by including the boilerplate in the `code-preview-file` fragments of language `html`
-but that would obscure the whole listing.
+We can already achieve that by including the boilerplate in the `code-preview-file` fragments of language `html`
+but that would obscure the listings.
 
 We will modify the code preview to apply the boilerplate to every instance and also add some reset styles on top of that.
 
@@ -617,7 +617,67 @@ If you don't want to follow the whole process of building the code preview yours
 }}
 ```
 
-### An examplary invocation
+### The stylesheet
+
+```css
+.code-preview {
+	width: 100%;
+	margin: 0 auto;
+	border: 6px solid rgb(65, 66, 68);
+	border-radius: 5px;
+	display: flex;
+	overflow: auto;
+	flex-direction: column;
+	background: var(--tertiary);
+	background: rgb(65, 66, 68);
+}
+
+.code-preview iframe {
+	min-height: 300px;
+	width: 100%;
+	margin: 0 auto;
+	border: 0;
+	background: #272822;
+}
+
+.code-preview::before {
+	color: var(--secondary);
+	background: #272822;
+	width: 80%;
+	height: 50%;
+	margin: 5px auto;
+	border-radius: 5px;
+	border-width: 6px 20px;
+	box-sizing: border-box;
+	text-align: center;
+	font-size: 8pt;
+	padding: 5px;
+}
+
+.code-preview--source {
+	background: rgb(65, 66, 68);
+	color: rgb(218, 218, 219); 
+	display: flex;
+	margin: 10px 0;
+	border-radius: 5px;
+	flex-wrap: wrap;
+}
+
+details.code-preview--file > summary {
+	padding: 5px 10px;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-size: 10pt;
+	min-width: 100px;
+}
+
+.code-preview--file {
+	width: 100%;
+	max-width: 100%;
+}
+```
+
+### An exemplary invocation
 
 ```html
 {{</* code-preview */>}}
@@ -634,4 +694,3 @@ If you don't want to follow the whole process of building the code preview yours
 ```
 
 [^1]: If the playground is compromised your website will likely be compromised as well.
-[^2]: As long as you only run trusted code inside.
