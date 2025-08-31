@@ -7,7 +7,6 @@ tags:
  - go
 categories:
 - backend
-comments: true
 aliases:
  - /using-google-apps-scripts-for-a-simple-backend
 ---

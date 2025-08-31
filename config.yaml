@@ -2,9 +2,11 @@ baseURL: 'https://mionskowski.pl'
 languageCode: 'en-us'
 title: 'Maciej Mionskowski'
 theme: 'PaperMod'
-paginate: 3
 
-copyright: '&copy; 2022 Maciej Mionskowski. Cover images available thanks to [Unsplash](https://unsplash.com).'
+pagination:
+  pagerSize: 3
+
+copyright: '&copy; 2025 Maciej Mionskowski. Cover images available thanks to [Unsplash](https://unsplash.com).'
 
 enableRobotsTXT: true
 buildDrafts: false
@@ -36,7 +38,7 @@ params:
   ShowPostNavLinks: true
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: false
-  comments: true
+  comments: false
   showtoc: true
   tocopen: false
   homeInfoParams:

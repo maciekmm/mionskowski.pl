@@ -8,7 +8,6 @@ tags:
  - event driven
 categories:
  - backend
-comments: true
 aliases:
  - /generic-event-dispatcher-in-go
 ---

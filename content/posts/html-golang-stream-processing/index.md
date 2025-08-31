@@ -7,7 +7,6 @@ tags:
  - stream processing
 categories:
  - backend
-comments: true
 aliases:
  - /html-golang-stream-processing
 ---

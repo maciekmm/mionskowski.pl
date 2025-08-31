@@ -1,0 +1,8 @@
+<blockquote>
+{{- .Inner | safeHTML }}
+{{- if not (eq (.Get "link") "") }}
+<footer>
+<cite><a href='{{ .Get "link" }}' title='{{ .Get "link" }}'>{{ .Get "link" | safeHTML }}</a></cite>
+</footer>
+{{- end }}
+</blockquote> 

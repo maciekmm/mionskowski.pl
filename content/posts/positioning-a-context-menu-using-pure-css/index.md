@@ -10,7 +10,6 @@ tags:
   - ui
 categories:
   - frontend
-comments: true
 excerpt: An efficient and simple solution to context menus displaying outside browser window.
 aliases:
   - /positioning-a-context-menu-using-pure-css

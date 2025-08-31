@@ -8,7 +8,6 @@ tags:
 categories:
   - frontend
   - devops
-comments: true
 aliases:
   - /environment-agnostic-frontend-images
 ---

@@ -294,16 +294,16 @@ As a result, I've decided to submit it to the Google Vulnerability Program, mayb
 
 There's parsing inconsistency between `x/net/html.Tokenizer` and web browsers leading to potential XSS injection attack.
 
-Consider the following input: `<script>alert(window.location.href)</script>`. When ran through html.Tokenizer one will get html.StartTagToken with a Token.Data equal to script followed by EOF ErrorToken This is a correct and expected behavior.
+Consider the following input: `&lt;script>alert(window.location.href)</script>`. When ran through html.Tokenizer one will get html.StartTagToken with a Token.Data equal to script followed by EOF ErrorToken This is a correct and expected behavior.
 
-Consider a very similar input: `<script =">alert(window.location.href)</script>`. This time around the html.Tokenizer only shows the EOF ErrorToken, while browser parses this to `<script ="="">alert(window.location.href)</script>` potentially leading to script injection and execution.
+Consider a very similar input: `&lt;script =">alert(window.location.href)</script>`. This time around the html.Tokenizer only shows the EOF ErrorToken, while browser parses this to `&lt;script ="="">alert(window.location.href)</script>` potentially leading to script injection and execution.
 
 "x/net/html" version: v0.7.0
 Attack scenario
 
 Consider a website with a comment system where certain HTML tags are allowed. For the purpose of this report let's say h1 are safe and allowed. To make sure that comments only have h1 tags one will use the x/net/html.Tokenizerand listen for `html.StartTagToken` or `html.SelfClosingTagTokens`.
 
-Due to this vulnerability an attacker can smuggle a `<script>` tag and execute arbitrary javascript on the website leading to XSS and potential data exfiltration from the website.
+Due to this vulnerability an attacker can smuggle a `&lt;script>` tag and execute arbitrary javascript on the website leading to XSS and potential data exfiltration from the website.
 {{< /blockquote >}}
 
 After about two weeks Google responded with the following:
